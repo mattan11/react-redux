@@ -1,11 +1,13 @@
-import {connect} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getAllMovies} from "../redux/operations";
 
-const MoviesContainer = ({movies, getAllMovies2}) => {
+const MoviesContainer = (props) => {
+    const movies = useSelector((state) => state.movies);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getAllMovies2();
+        dispatch(getAllMovies());
     }, []);
 
     return (
@@ -17,16 +19,17 @@ const MoviesContainer = ({movies, getAllMovies2}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        movies: state.movies
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         movies: state.movies
+//     }
+// }
+//
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         getAllMovies2: () => dispatch(getAllMovies())
+//     }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getAllMovies2: () => dispatch(getAllMovies())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);
+// export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);
+export default MoviesContainer;
